@@ -14,8 +14,8 @@ struct Students		//Структура Students
 };
 struct NodeList		//Связанный список
 {
-	//struct Students data;
-	int data;
+	struct Students data;
+	//int data;
     struct NodeList* next;
 };
 //Ввод структуры Students
