@@ -15,9 +15,20 @@ struct Students		//Структура Students
 struct NodeList		//Связанный список
 {
 	struct Students data;
-	//int data;
     struct NodeList* next;
 };
+//Вывод стуктуры Students
+void printStudents(struct Students person)
+{
+	printf("_____________________________________________________________________\n");
+	printf("|Порядковый номер студента:           |%-29d|\n", person.number);
+	printf("|Фамилия и инициалы студента:         |%-29s|\n", person.name);
+	printf("|Номер группы студента:               |%-29d|\n", person.groupNumber);
+	printf("|Оценка по Математике студента:       |%-29d|\n", person.mathMark);
+	printf("|Оценка по Физике студента:           |%-29d|\n", person.physicsMark);
+	printf("|Оценка по Английскому языку студента:|%-29d|\n", person.englishMark);
+	printf("_____________________________________________________________________\n");
+}
 //Ввод структуры Students
 struct Students writeStudents(int number)
 {
@@ -41,11 +52,10 @@ struct Students writeStudents(int number)
 
 //-------------------------------------------------------
 //1.Организация списка
-struct NodeList* createNode()
+struct NodeList* createNode(int number)
 {
 	struct NodeList* head = (struct NodeList*)malloc(sizeof(struct NodeList));
-	printf("Введите элемент списка:");
-	scanf("%d", &head->data);
+	head->data = writeStudents(number);
 	head->next = NULL;
 	return head;
 }
@@ -56,7 +66,7 @@ void printList(struct NodeList *list)
 	struct NodeList* temp = list;
 	while (temp != NULL)
 	{
-		printf("%d", temp->data);
+		printStudents(temp->data);
 		temp = temp->next;
 	}
 	getchar();
@@ -66,12 +76,14 @@ void printList(struct NodeList *list)
 //3.Добавление нового элемента в список
 void pushBack(struct NodeList* list)
 {
-	struct NodeList* newNode = createNode();
+	int number = 2;
 	struct NodeList* temp = list;
 	while (temp->next != NULL)
 	{
 		temp = temp->next;
+		number++;
 	}
+	struct NodeList* newNode = createNode(number);
 	temp->next = newNode;
 }
 //--------------------------------------------------------
@@ -115,7 +127,7 @@ int main()
 		switch (action)
 		{
 		case 1://Организация списка
-			myList = createNode();
+			myList = createNode(1);
 			break;
 		case 2://Просмотр списка
 			printList(myList);
