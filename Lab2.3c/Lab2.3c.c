@@ -52,12 +52,11 @@ struct Students writeStudents(int number)
 
 //-------------------------------------------------------
 //1.Организация списка
-struct NodeList* createNode(int number)
+struct NodeList* createNode()
 {
-	struct NodeList* head = (struct NodeList*)malloc(sizeof(struct NodeList));
-	head->data = writeStudents(number);
-	head->next = NULL;
-	return head;
+	struct NodeList* node = (struct NodeList*)malloc(sizeof(struct NodeList));
+	node->next = NULL;
+	return node;
 }
 //-------------------------------------------------------
 //2.Вывод списка
@@ -74,17 +73,27 @@ void printList(struct NodeList *list)
 }
 //--------------------------------------------------------
 //3.Добавление нового элемента в список
-void pushBack(struct NodeList* list)
+void pushBack(struct NodeList** head)
 {
-	int number = 2;
-	struct NodeList* temp = list;
-	while (temp->next != NULL)
+	int number = 1;
+	struct NodeList* newNode = createNode();
+
+	if (*head == NULL)//Если добавленный узел первый
 	{
-		temp = temp->next;
-		number++;
+		*head = newNode;
 	}
-	struct NodeList* newNode = createNode(number);
-	temp->next = newNode;
+	else//Если добавленный узел НЕ первый
+	{
+		struct NodeList* temp = *head;
+		number++;
+		while (temp->next != NULL)
+		{
+			temp = temp->next;
+			number++;
+		}
+		temp->next = newNode;
+	}
+	newNode->data = writeStudents(number);
 }
 //--------------------------------------------------------
 //8.Удаление списка
@@ -127,13 +136,12 @@ int main()
 		switch (action)
 		{
 		case 1://Организация списка
-			myList = createNode(1);
 			break;
 		case 2://Просмотр списка
 			printList(myList);
 			break;
 		case 3://Добавление элемента списка
-			pushBack(myList);
+			pushBack(&myList);
 			break;
 		case 4://Исключение элемента из списка
 			break;
