@@ -44,8 +44,42 @@ void pushBack(struct NodeList** head)
 	newNode->data = writeStudents(number);
 }
 
+void pushTwoElemAfterFirst(struct NodeList* head)
+{
+	if (head == NULL)
+	{
+		printf("\nЭтот список пуст. Добавте хотя бы 1 элемент.\n");
+		getchar();
+		getchar();
+		return;
+	}
+	struct NodeList* current = head;
+	for (int i = 2; i < 4; i++)//Добавление двух элементов
+	{
+		struct NodeList* newNode = createNode();
+		newNode->data = writeStudents(i);
+
+		struct NodeList* savedNext = current->next;
+		current->next = newNode;
+		newNode->next = savedNext;
+		current = current->next;
+	}
+
+	current = current->next;
+	//Привсвоение новых порядковых номеров
+	while (current != NULL)
+	{
+		current->data.number += 2;
+		current = current->next;
+	}
+	return;
+}
 //--------------------------------------------------------
 //TODO 5.Сохранение в файл
+void saveToFile(struct NodeList* head, char path[])
+{
+	;
+}
 //--------------------------------------------------------
 //TODO 6.Загрузка данных из файла
 //--------------------------------------------------------
