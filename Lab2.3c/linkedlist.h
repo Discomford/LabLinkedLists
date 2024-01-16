@@ -16,8 +16,10 @@ struct NodeList
 
 struct NodeList* createNode();
 void printList		(struct NodeList* list);
-void pushBack		(struct NodeList** head);
-void pushTwoElemAfterFirst(struct NodeList* head);
+void pushBack		(struct NodeList** head, struct Students person);
+void pushTwoElemAfterFirst(struct NodeList* head, struct Students first, struct Students second);//Не работатет
+void saveToFile		(struct NodeList* head, char path[]);
+void loadFromFile	(struct NodeList** head, char path[]);//Не работатет
 void removeElement	(struct NodeList** head, int number);
 void deleteList		(struct NodeList* list);
 

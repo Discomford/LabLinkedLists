@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "linkedlist.h"
-#include "students.h"
 
 
 
@@ -31,34 +30,7 @@ int main()
 		printf("_______________________________________\n");
 		printf("Введите номер пункта меню:");
 		scanf("%d", &action);
-
-		switch (action)
-		{
-		case 1://Организация списка
-			break;
-		case 2://Просмотр списка
-			printList(myList);
-			break;
-		case 3://Добавление элемента списка
-			pushBack(&myList);
-			break;
-		case 4://Исключение элемента из списка
-			break;
-		case 5://Сохранение в файл
-			saveToFile(myList, path);
-			break;
-		case 6://
-			printf("\nВведите номер удаляемого элемента:");
-			scanf("%d", &action);
-			removeElement(&myList, action);
-			break;
-		case 7://Вставка двух новых элементов после первого элемента
-			pushTwoElemAfterFirst(myList);
-			break;
-		case 8://Выход из программы
-			deleteList(myList);
-			return 0;
-			break;
-		}
+		mainMenu(action, myList, path);
+		
 	}
 }

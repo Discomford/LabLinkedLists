@@ -19,7 +19,7 @@ void printList(struct NodeList* list)
 	return;
 }
 
-void pushBack(struct NodeList** head)
+void pushBack(struct NodeList** head, struct Students person)
 {
 	int number = 1;
 	struct NodeList* newNode = createNode();
@@ -39,7 +39,8 @@ void pushBack(struct NodeList** head)
 		}
 		temp->next = newNode;
 	}
-	newNode->data = writeStudents(number);
+	newNode->data = person;
+	person.number = number;
 }
 
 void pushTwoElemAfterFirst(struct NodeList* head)

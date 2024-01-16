@@ -17,6 +17,7 @@ void printStudents(struct Students person)
 	printf("_____________________________________________________________________\n");
 }
 //Ввод структуры Students
+//Если не знаешь номера ставь по умолчанию 0
 struct Students writeStudents(int number)
 {
 	struct Students person;
