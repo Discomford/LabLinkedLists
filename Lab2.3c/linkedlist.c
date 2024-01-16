@@ -4,8 +4,8 @@
 #include "linkedlist.h"
 
 //Декларация приватных функций
-int changeThisAndSubsequentNumbers(struct NodeList* current, int value);
-void removeNextElem(struct NodeList* current);
+void changeThisAndSubsequentNumbers	(struct NodeList* current, int value);
+void removeNextElem					(struct NodeList* current);
 
 void printList(struct NodeList* list)
 {
@@ -15,8 +15,7 @@ void printList(struct NodeList* list)
 		printStudents(temp->data);
 		temp = temp->next;
 	}
-	getchar();
-	getchar();
+	getchar(); getchar();
 	return;
 }
 
@@ -48,8 +47,7 @@ void pushTwoElemAfterFirst(struct NodeList* head)
 	if (head == NULL)
 	{
 		printf("\nЭтот список пуст. Добавте хотя бы 1 элемент.\n");
-		getchar();
-		getchar();
+		getchar(); getchar();
 		return;
 	}
 	struct NodeList* current = head;
@@ -79,13 +77,47 @@ struct NodeList* createNode()
 //TODO 5.Сохранение в файл
 void saveToFile(struct NodeList* head, char path[])
 {
-	;
+	struct NodeList* current = head;
+	FILE* fp = fopen(path, "wb");
+	if (!fp)
+	{
+		printf("Не удалось открыть файл\n");
+		getchar();getchar();
+		return;
+	}
+	while (current != NULL)
+	{
+		fwrite(&current->data, sizeof(struct Students), 1, fp);
+		current = current->next;
+	}
+	fclose(fp);
+	getchar();getchar();
+	return;
 }
 //--------------------------------------------------------
 //TODO 6.Загрузка данных из файла
-void loadFromFile(struct NodeList** head)
+//Не будет работать в текущем в виде проекта потому, что
+//некоторые функции работают на разных уровнях абстракции
+void loadFromFile(struct NodeList** head, char path[])
 {
-	;
+	return;
+	deleteList(*head);
+	struct NodeList* current = head;
+	FILE* fp = fopen(path, "rb");
+	if (!fp)
+	{
+		printf("Не удалось открыть файл\n");
+		getchar(); getchar();
+		return;
+	}
+	/*while (fread(&current->data, sizeof(struct Students), 1, fp) == 1)
+	{
+		current 
+	}*/
+
+	fclose(fp);
+	getchar(); getchar();
+	return;
 }
 
 //Функция удаления элемента 
@@ -95,8 +127,7 @@ void removeElement(struct NodeList** head, int number)
 	if(number < 1)//Exception
 	{
 		printf("\nТакого объекта не существует");
-		getchar();
-		getchar();
+		getchar(); getchar();
 		return;
 	}
 	else if (number == 1)
@@ -113,8 +144,7 @@ void removeElement(struct NodeList** head, int number)
 			if (current->next == NULL)//Exception
 			{
 				printf("\nТакого объекта не существует");
-				getchar();
-				getchar();
+				getchar(); getchar();
 				return;
 			}
 			current = current->next;
@@ -136,14 +166,14 @@ void removeNextElem(struct NodeList* current)
 	return;
 }
 //Private: Изменения номера этого и последующих элементов
-int changeThisAndSubsequentNumbers(struct NodeList* current,int value)
+void changeThisAndSubsequentNumbers(struct NodeList* current,int value)
 {
 	while (current != NULL)
 	{
 		current->data.number += value;
 		current = current->next;
 	}
-	return 0;	
+	return;	
 }
 
 void deleteList(struct NodeList* list)
