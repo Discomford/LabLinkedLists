@@ -3,12 +3,9 @@
 
 #include "linkedlist.h"
 
-struct NodeList* createNode()
-{
-	struct NodeList* node = (struct NodeList*)malloc(sizeof(struct NodeList));
-	node->next = NULL;
-	return node;
-}
+//Декларация приватных функций
+int changeThisAndSubsequentNumbers(struct NodeList* current, int value);
+void removeNextElem(struct NodeList* current);
 
 void printList(struct NodeList* list)
 {
@@ -20,6 +17,7 @@ void printList(struct NodeList* list)
 	}
 	getchar();
 	getchar();
+	return;
 }
 
 void pushBack(struct NodeList** head)
@@ -68,12 +66,14 @@ void pushTwoElemAfterFirst(struct NodeList* head)
 
 	current = current->next;
 	//Привоение новых порядковых номеров
-	while (current != NULL)
-	{
-		current->data.number += 2;
-		current = current->next;
-	}
-	return;
+	changeThisAndSubsequentNumbers(current, 2);
+}
+
+struct NodeList* createNode()
+{
+	struct NodeList* node = (struct NodeList*)malloc(sizeof(struct NodeList));
+	node->next = NULL;
+	return node;
 }
 //--------------------------------------------------------
 //TODO 5.Сохранение в файл
@@ -87,8 +87,8 @@ void loadFromFile(struct NodeList** head)
 {
 	;
 }
-//--------------------------------------------------------
-//TODO Функция удаления элемента 
+
+//Функция удаления элемента 
 void removeElement(struct NodeList** head, int number)
 {
 	struct NodeList* current;
@@ -107,7 +107,6 @@ void removeElement(struct NodeList** head, int number)
 	}
 	else
 	{
-		struct NodeList* savedNext;
 		current = *head;
 		for (int i = 0; i<number - 2; i++)
 		{
@@ -119,30 +118,43 @@ void removeElement(struct NodeList** head, int number)
 				return;
 			}
 			current = current->next;
+			removeNextElem(current);
 		}
-		savedNext = current->next->next;
-		free(current->next);
-		current->next = savedNext;
-		current = current->next;
+		
 	}
-	//Привоение новых порядковых номеров
+	changeThisAndSubsequentNumbers(current, -1);
+	return;
+}
+//Private: Удаление элемента стоящего в списке слудеющим
+void removeNextElem(struct NodeList* current)
+{
+	struct NodeList* savedNext;
+	savedNext = current->next->next;
+	free(current->next);
+	current->next = savedNext;
+	current = current->next;
+	return;
+}
+//Private: Изменения номера этого и последующих элементов
+int changeThisAndSubsequentNumbers(struct NodeList* current,int value)
+{
 	while (current != NULL)
 	{
-		current->data.number -= 1;
+		current->data.number += value;
 		current = current->next;
 	}
-	return;
+	return 0;	
 }
 
 void deleteList(struct NodeList* list)
 {
 	struct NodeList* temp;
-
 	while (list != NULL)
 	{
 		temp = list;
 		list = list->next;
 		free(temp);
 	}
+	return;
 }
 
