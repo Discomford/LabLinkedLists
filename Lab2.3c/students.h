@@ -1,7 +1,9 @@
 #ifndef STUDENTS_H
+
+#include <stdio.h>
+
 #define STUDENTS_H
 
-#include "students.h"
 struct Students
 {
 	int number;	    //Порядковый номер

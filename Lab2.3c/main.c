@@ -1,17 +1,21 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+﻿//Author: Daniyar Bayguzhinov
+//Главный файл исходного кода
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include "linkedlist.h"
 #include "students.h"
+
+
 
 int main()
 {
 	system("chcp 1251");
 	system("cls");
 
-	char path[] = "file";
-	int action;
-	struct NodeList* myList = NULL;
+	char	path[] = "file";
+	int		action;
+	struct	NodeList* myList = NULL;
 	while (1)
 	{
 		system("cls");
@@ -21,7 +25,7 @@ int main()
 		printf("|3- Добавление элемента списка          |\n");
 		printf("|4-                                     |\n");
 		printf("|5-                                     |\n");
-		printf("|6-                                     |\n");
+		printf("|6- Удаление элемента                   |\n");
 		printf("|7- Вставка двух элементов после первого|\n");
 		printf("|8- Выход                               |\n");
 		printf("_______________________________________\n");
@@ -42,7 +46,10 @@ int main()
 			break;
 		case 5://Сохранение в файл
 			break;
-		case 6://Загрузка данных из файла
+		case 6://
+			printf("\nВведите номер удаляемого элемента:");
+			scanf("%d", &action);
+			removeElement(&myList, action);
 			break;
 		case 7://Вставка двух новых элементов после первого элемента
 			pushTwoElemAfterFirst(myList);

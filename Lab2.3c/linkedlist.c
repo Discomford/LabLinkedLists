@@ -1,7 +1,8 @@
+//Author: Daniyar Bayguzhinov
+//Функции для работы с структурами типа NodeList
+
 #include "linkedlist.h"
 
-#include <stdio.h>
-#include <stdlib.h>
 struct NodeList* createNode()
 {
 	struct NodeList* node = (struct NodeList*)malloc(sizeof(struct NodeList));
@@ -66,7 +67,7 @@ void pushTwoElemAfterFirst(struct NodeList* head)
 	}
 
 	current = current->next;
-	//Привсвоение новых порядковых номеров
+	//Привоение новых порядковых номеров
 	while (current != NULL)
 	{
 		current->data.number += 2;
@@ -82,12 +83,57 @@ void saveToFile(struct NodeList* head, char path[])
 }
 //--------------------------------------------------------
 //TODO 6.Загрузка данных из файла
-//--------------------------------------------------------
-
-void removeElement(struct NodeList* head, int number)
+void loadFromFile(struct NodeList** head)
 {
 	;
 }
+//--------------------------------------------------------
+//TODO Функция удаления элемента 
+void removeElement(struct NodeList** head, int number)
+{
+	struct NodeList* current;
+	if(number < 1)//Exception
+	{
+		printf("\nТакого объекта не существует");
+		getchar();
+		getchar();
+		return;
+	}
+	else if (number == 1)
+	{
+		current = (*head)->next;
+		free(*head);
+		*head = current;
+	}
+	else
+	{
+		struct NodeList* savedNext;
+		current = *head;
+		for (int i = 0; i<number - 2; i++)
+		{
+			if (current->next == NULL)//Exception
+			{
+				printf("\nТакого объекта не существует");
+				getchar();
+				getchar();
+				return;
+			}
+			current = current->next;
+		}
+		savedNext = current->next->next;
+		free(current->next);
+		current->next = savedNext;
+		current = current->next;
+	}
+	//Привоение новых порядковых номеров
+	while (current != NULL)
+	{
+		current->data.number -= 1;
+		current = current->next;
+	}
+	return;
+}
+
 void deleteList(struct NodeList* list)
 {
 	struct NodeList* temp;
