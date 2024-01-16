@@ -14,7 +14,7 @@ struct Students
 	int englishMark;//ќценка по английскому €зыку
 };
 
-void printStudents(struct Students person);
-struct Students writeStudents(int number);
+void printStudents				(struct Students person);
+struct Students writeStudents	(int number);
 
 #endif

@@ -30,20 +30,20 @@ void pushBack(struct NodeList** head, struct Students person)
 	}
 	else			  //Если добавленный узел НЕ первый
 	{
-		struct NodeList* temp = *head;
-		number++;
-		while (temp->next != NULL)
+		struct NodeList* current = *head;
+		while (current != NULL)
 		{
-			temp = temp->next;
+			current = current->next;
 			number++;
 		}
-		temp->next = newNode;
+		current = newNode;
 	}
-	newNode->data = person;
 	person.number = number;
+	newNode->data = person;
+	return;
 }
 
-void pushTwoElemAfterFirst(struct NodeList* head)
+void pushTwoElemAfterFirst(struct NodeList* head, struct Students first, struct Students second)
 {
 	if (head == NULL)
 	{
@@ -51,20 +51,19 @@ void pushTwoElemAfterFirst(struct NodeList* head)
 		getchar(); getchar();
 		return;
 	}
-	struct NodeList* current = head;
-	for (int i = 2; i < 4; i++)//Добавление двух элементов
-	{
-		struct NodeList* newNode = createNode();
-		newNode->data = writeStudents(i);
 
-		struct NodeList* savedNext = current->next;
-		current->next = newNode;
-		newNode->next = savedNext;
-		current = current->next;
-	}
+	struct NodeList* current = head;
+	struct NodeList* savedNext = current->next;
+
+	current->next = createNode();
+	current->next->data = first;
 
 	current = current->next;
-	//Привоение новых порядковых номеров
+	current->next = createNode();
+	current->next->data = second;
+	
+	current = current->next;
+	current = current->next;
 	changeThisAndSubsequentNumbers(current, 2);
 }
 
@@ -75,7 +74,7 @@ struct NodeList* createNode()
 	return node;
 }
 //--------------------------------------------------------
-//TODO 5.Сохранение в файл
+//Сохранение в файл
 void saveToFile(struct NodeList* head, char path[])
 {
 	struct NodeList* current = head;
@@ -95,15 +94,14 @@ void saveToFile(struct NodeList* head, char path[])
 	getchar();getchar();
 	return;
 }
-//--------------------------------------------------------
-//TODO 6.Загрузка данных из файла
-//Не будет работать в текущем в виде проекта потому, что
-//некоторые функции работают на разных уровнях абстракции
+// Загрузка данных из файла
 void loadFromFile(struct NodeList** head, char path[])
 {
-	return;
 	deleteList(*head);
 	struct NodeList* current = head;
+	struct Students  temp;
+	int				 numbers = 1;
+	
 	FILE* fp = fopen(path, "rb");
 	if (!fp)
 	{
@@ -111,10 +109,10 @@ void loadFromFile(struct NodeList** head, char path[])
 		getchar(); getchar();
 		return;
 	}
-	/*while (fread(&current->data, sizeof(struct Students), 1, fp) == 1)
+	while (fread(&temp, sizeof(struct Students), 1, fp) == 1)
 	{
-		current 
-	}*/
+		pushBack(head, temp);
+	}
 
 	fclose(fp);
 	getchar(); getchar();
@@ -150,10 +148,9 @@ void removeElement(struct NodeList** head, int number)
 			}
 			current = current->next;
 			removeNextElem(current);
+			changeThisAndSubsequentNumbers(current, -1);
 		}
-		
 	}
-	changeThisAndSubsequentNumbers(current, -1);
 	return;
 }
 //Private: Удаление элемента стоящего в списке слудеющим
@@ -163,7 +160,6 @@ void removeNextElem(struct NodeList* current)
 	savedNext = current->next->next;
 	free(current->next);
 	current->next = savedNext;
-	current = current->next;
 	return;
 }
 //Private: Изменения номера этого и последующих элементов
