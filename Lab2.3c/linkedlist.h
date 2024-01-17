@@ -19,7 +19,7 @@ int	 findListLength			(struct NodeList* head);
 void printList				(struct NodeList* list);
 void pushBack				(struct NodeList** head,	struct Students person);
 void pushTwoElemAfterFirst	(struct NodeList* head,		struct Students first, struct Students second);
-void changeItAndNextAfterNumbers(struct NodeList* head, int number, int value);
+int	 changeItAndNextAfterNumbers(struct NodeList* head, int number, int value);
 void saveToFile				(struct NodeList* head,		char path[]);
 void loadFromFile			(struct NodeList** head,	char path[]);
 void removeElement			(struct NodeList** head,	int number);

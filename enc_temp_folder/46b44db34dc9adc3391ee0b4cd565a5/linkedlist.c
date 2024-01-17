@@ -76,6 +76,7 @@ struct NodeList* createNode()
 	node->next = NULL;
 	return node;
 }
+//--------------------------------------------------------
 //Сохранение в файл
 void saveToFile(struct NodeList* head, char path[])
 {

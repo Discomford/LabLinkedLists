@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "linkedlist.h"
-
+#include "menu.h"
 
 
 int main()
@@ -41,7 +41,7 @@ int main()
 			menuAddElement(&myList);
 			break;
 		case 4://Загрузка из файла
-			loadFromFile(&myList, path);
+			menuLoadFromFile(&myList, path);
 			break;
 		case 5://Сохранение в файл
 			saveToFile(myList, path);

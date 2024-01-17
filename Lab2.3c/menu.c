@@ -4,13 +4,19 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "menu.h"
 
-
 void menuAddElement(struct NodeList** list)
 {
 	struct Students newStudent = writeStudents(1 + findListLength(*list));
 	pushBack(list, newStudent);
 }
-void menuRemoveStudentFromList(struct Students **list)
+
+void menuLoadFromFile(struct NodeList** list, char path[])
+{
+	int length = findListLength(*list);
+	loadFromFile(list, path);
+	changeItAndNextAfterNumbers(*list, length, length);
+}
+void menuRemoveStudentFromList(struct NodeList **list)
 {
 	int number;
 	printf("\n¬ведите номер удал€емого студента:");
