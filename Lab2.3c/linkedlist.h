@@ -16,6 +16,7 @@ struct NodeList
 
 struct NodeList* createNode	();
 int	 findListLength			(struct NodeList* head);
+struct Students getByNumber	(struct NodeList* head,		int number);
 void printList				(struct NodeList* list);
 void pushBack				(struct NodeList** head,	struct Students person);
 void pushTwoElemAfterFirst	(struct NodeList* head,		struct Students first, struct Students second);

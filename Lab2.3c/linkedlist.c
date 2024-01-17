@@ -5,7 +5,7 @@
 
 
 //Декларация приватных функций
-struct NodeList* createNodeWithData		(struct Students data);
+struct NodeList*	createNodeWithData	(struct Students data);
 struct NodeList*	createNode			();
 void				removeFirstElement	(struct NodeList** head);
 void				removeNextElem		(struct NodeList* current);
@@ -17,7 +17,16 @@ int findListLength(struct NodeList* head)
 	if (head == NULL) return 0;
 	return 1 + findListLength(head->next);
 }
-
+//Получить элемент по номеру
+struct Students getByNumber(struct NodeList* head, int number)
+{
+	struct NodeList* current = head;
+	for (int i = 0; i < number; i++)
+	{
+		current = current->next;
+	}
+	return current->data;
+}
 //Вывод последовательно всех данных из списка
 void printList(struct NodeList* list)
 {
