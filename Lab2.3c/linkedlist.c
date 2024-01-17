@@ -4,9 +4,8 @@
 #include "linkedlist.h"
 
 //Декларация приватных функций
-void changeThisAndSubsequentNumbers	(struct NodeList* current, int value);
-void removeNextElem					(struct NodeList* current);
-struct NodeList* createNode();
+void				removeNextElem	(struct NodeList* current);
+struct NodeList*	createNode		();
 
 int findListLength(struct NodeList* head)
 {
@@ -70,7 +69,7 @@ void pushTwoElemAfterFirst(struct NodeList* head, struct Students first, struct 
 	current = current->next;
 	current->next = savedNext;
 }
-//Private
+//Private создание пустого узла
 struct NodeList* createNode()
 {
 	struct NodeList* node = (struct NodeList*)malloc(sizeof(struct NodeList));
@@ -153,7 +152,6 @@ void removeElement(struct NodeList** head, int number)
 			current = current->next;
 		}
 		removeNextElem(current);
-		changeThisAndSubsequentNumbers(current, -1);
 	}
 	return;
 }
@@ -166,16 +164,7 @@ void removeNextElem(struct NodeList* current)
 	current->next = savedNext;
 	return;
 }
-//Private: Изменения номера этого и последующих элементов
-void changeThisAndSubsequentNumbers(struct NodeList* current,int value)
-{
-	while (current != NULL)
-	{
-		current->data.number += value;
-		current = current->next;
-	}
-	return;	
-}
+
 void changeItAndNextAfterNumbers(struct NodeList* head, int number, int value)
 {
 	for (int i = 0; i < number; i++)

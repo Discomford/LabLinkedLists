@@ -16,6 +16,7 @@ void menuRemoveStudentFromList(struct Students **list)
 	printf("\n¬ведите номер удал€емого студента:");
 	scanf("%d", &number);
 	removeElement(list, number);
+	changeItAndNextAfterNumbers(*list, number - 1, -1);
 	return;
 }
 
