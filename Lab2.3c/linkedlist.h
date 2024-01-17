@@ -22,7 +22,7 @@ void pushTwoElemAfterFirst	(struct NodeList* head,		struct Students first, struc
 int	 changeItAndNextAfterNumbers(struct NodeList* head, int number, int value);
 void saveToFile				(struct NodeList* head,		char path[]);
 void loadFromFile			(struct NodeList** head,	char path[]);
-void removeElement			(struct NodeList** head,	int number);
+int	 removeElement			(struct NodeList** head,	int number);
 void deleteList				(struct NodeList* list);
 
 #endif
