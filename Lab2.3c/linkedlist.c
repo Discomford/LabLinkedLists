@@ -6,23 +6,28 @@
 //Декларация приватных функций
 void changeThisAndSubsequentNumbers	(struct NodeList* current, int value);
 void removeNextElem					(struct NodeList* current);
-
+int findListLength(struct NodeList* head)
+{
+	if (head == NULL)
+		return 0;
+	return 1 + findListLength(head->next);
+}
 void printList(struct NodeList* list)
 {
-	struct NodeList* temp = list;
-	while (temp != NULL)
+	struct NodeList* current = list;
+	while (current != NULL)
 	{
-		printStudents(temp->data);
-		temp = temp->next;
+		printStudents(current->data);
+		current = current->next;
 	}
 	getchar(); getchar();
 	return;
 }
 
-void pushBack(struct NodeList** head, struct Students person)
+void pushBack(struct NodeList** head, struct Students student)
 {
-	int number = 1;
 	struct NodeList* newNode = createNode();
+	newNode->data = student;
 
 	if (*head == NULL)//Если добавленный узел первый
 	{
@@ -31,15 +36,12 @@ void pushBack(struct NodeList** head, struct Students person)
 	else			  //Если добавленный узел НЕ первый
 	{
 		struct NodeList* current = *head;
-		while (current != NULL)
+		while (current->next != NULL)
 		{
 			current = current->next;
-			number++;
 		}
-		current = newNode;
+		current->next = newNode;
 	}
-	person.number = number;
-	newNode->data = person;
 	return;
 }
 
@@ -66,7 +68,7 @@ void pushTwoElemAfterFirst(struct NodeList* head, struct Students first, struct 
 	current = current->next;
 	changeThisAndSubsequentNumbers(current, 2);
 }
-
+//Private
 struct NodeList* createNode()
 {
 	struct NodeList* node = (struct NodeList*)malloc(sizeof(struct NodeList));
@@ -147,9 +149,9 @@ void removeElement(struct NodeList** head, int number)
 				return;
 			}
 			current = current->next;
-			removeNextElem(current);
-			changeThisAndSubsequentNumbers(current, -1);
 		}
+		removeNextElem(current);
+		changeThisAndSubsequentNumbers(current, -1);
 	}
 	return;
 }

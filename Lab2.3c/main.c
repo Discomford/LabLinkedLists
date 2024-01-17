@@ -30,7 +30,31 @@ int main()
 		printf("_______________________________________\n");
 		printf("Введите номер пункта меню:");
 		scanf("%d", &action);
-		mainMenu(action, myList, path);
-		
+		switch (action)
+		{
+		case 1:
+			break;
+		case 2://Просмотр списка
+			printList(myList);
+			break;
+		case 3://Добавление элемента списка
+			menuAddElement(&myList);
+			break;
+		case 4://Загрузка из файла
+			loadFromFile(&myList, path);
+			break;
+		case 5://Сохранение в файл
+			saveToFile(myList, path);
+			break;
+		case 6://Удаление элемента 
+			menuRemoveStudentFromList(&myList);
+			break;
+		case 7://Вставка двух новых элементов после первого элемента
+			menuAddTwoElementsAfterFirst(myList);
+			break;
+		case 8://Выход из программы
+			return 0;
+			break;
+		}	
 	}
 }

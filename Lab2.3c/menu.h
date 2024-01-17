@@ -12,5 +12,8 @@ struct NodeList;
 
 
 //Функции:
+void menuAddElement(struct NodeList** list);
+void menuRemoveStudentFromList(struct Students** list);
+void menuAddTwoElementsAfterFirst(struct NodeList* list);
 
 #endif
