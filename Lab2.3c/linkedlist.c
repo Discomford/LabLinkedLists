@@ -187,7 +187,7 @@ void removeNextElem(struct NodeList* current)
 	current->next = savedNext;
 	return;
 }
-//Функция смены номеров того и последующих элементов на значение value
+//Функция смены номеров этого и последующих элементов на значение value
 int changeItAndNextAfterNumbers(struct NodeList* head, int number, int value)
 {
 	for (int i = 0; i < number; i++)

@@ -14,7 +14,7 @@ struct NodeList
 	struct NodeList* next;
 };
 
-struct NodeList* createNode	();
+
 int	 findListLength			(struct NodeList* head);
 struct Students getByNumber	(struct NodeList* head,		int number);
 void printList				(struct NodeList* list);
