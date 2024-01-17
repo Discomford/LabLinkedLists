@@ -20,10 +20,10 @@ struct Students getByNumber	(struct NodeList* head,		int number);
 void printList				(struct NodeList* list);
 void pushBack				(struct NodeList** head,	struct Students person);
 void pushTwoElemAfterFirst	(struct NodeList* head,		struct Students first, struct Students second);
-int	 changeItAndNextAfterNumbers(struct NodeList* head, int number, int value);
 void saveToFile				(struct NodeList* head,		char path[]);
 void loadFromFile			(struct NodeList** head,	char path[]);
 int	 removeElement			(struct NodeList** head,	int number);
+int	 changeItAndNextAfterNumbers(struct NodeList* head, int number, int value);
 void deleteList				(struct NodeList* list);
 
 #endif

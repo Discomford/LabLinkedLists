@@ -13,8 +13,10 @@ struct NodeList;
 
 //Функции:
 void menuAddElement(struct NodeList** list);
-void menuRemoveStudentFromList(struct NodeList** list);
-void menuLoadFromFile(struct NodeList** list, char path[]);
 void menuAddTwoElementsAfterFirst(struct NodeList* list);
+void menuRemoveStudentFromList(struct NodeList** list);
+void menuSaveToFile(struct NodeList* list, char path[]);
+void menuLoadFromFile(struct NodeList** list, char path[]);
+
 
 #endif

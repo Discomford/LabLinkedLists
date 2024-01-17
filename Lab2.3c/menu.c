@@ -4,27 +4,30 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "menu.h"
 
+//Пункт меню, добавляющий элемент в список с сохранением нумерации
 void menuAddElement(struct NodeList** list)
 {
 	struct Students newStudent = writeStudents(1 + findListLength(*list));
 	pushBack(list, newStudent);
+	return;
 }
-
-void menuLoadFromFile(struct NodeList** list, char path[])
+//Пункт меню, добавляющий два элемента после первого
+void menuAddTwoElementsAfterFirst(struct NodeList* list)
 {
-	int length = findListLength(*list);
-	loadFromFile(list, path);
-	changeItAndNextAfterNumbers(*list, length, length);
-	
-	printf("\nЗагрузка из файла прошла успешно");
+	struct Students first = writeStudents(2);
+	struct Students second = writeStudents(3);
+	pushTwoElemAfterFirst(list, first, second);
+	changeItAndNextAfterNumbers(list, 3, 2);
+	return;
 }
-void menuRemoveStudentFromList(struct NodeList **list)
+//Пункт меню, удаляющий студента из списка
+void menuRemoveStudentFromList(struct NodeList** list)
 {
 	int number, accept;
 	printf("\nВведите номер удаляемого студента:");
 	scanf("%d", &number);
 
-	printStudents(getByNumber(*list, number-1));
+	printStudents(getByNumber(*list, number - 1));
 	printf("\nВы уверены что хотите удалить данного студента?(1/0)");
 
 	scanf("%d", &accept);
@@ -37,12 +40,21 @@ void menuRemoveStudentFromList(struct NodeList **list)
 	}
 	return;
 }
-
-void menuAddTwoElementsAfterFirst(struct NodeList* list)
+//Пункт меню, сохраняющий данные в файл
+void menuSaveToFile(struct NodeList* list, char path[])
 {
-	struct Students first	=	writeStudents(2);
-	struct Students second	=	writeStudents(3);
-	pushTwoElemAfterFirst(list, first, second);
-	changeItAndNextAfterNumbers(list, 3, 2);
+	saveToFile(list, path);
+	printf("\nДанные были успешно сохраненны!");
 	return;
 }
+//Пункт меню, загружающий данные в файл
+void menuLoadFromFile(struct NodeList** list, char path[])
+{
+	int length = findListLength(*list);
+	loadFromFile(list, path);
+	changeItAndNextAfterNumbers(*list, length, length);
+	
+	printf("\nЗагрузка из файла прошла успешно");
+	return;
+}
+
