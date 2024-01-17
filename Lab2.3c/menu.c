@@ -15,14 +15,26 @@ void menuLoadFromFile(struct NodeList** list, char path[])
 	int length = findListLength(*list);
 	loadFromFile(list, path);
 	changeItAndNextAfterNumbers(*list, length, length);
+	
+	printf("\nЗагрузка из файла прошла успешно");
 }
 void menuRemoveStudentFromList(struct NodeList **list)
 {
-	int number;
+	int number, accept;
 	printf("\nВведите номер удаляемого студента:");
 	scanf("%d", &number);
-	removeElement(list, number);
-	changeItAndNextAfterNumbers(*list, number - 1, -1);
+
+	printStudents(getByNumber(*list, number-1));
+	printf("\nВы уверены что хотите удалить данного студента?(1/0)");
+
+	scanf("%d", &accept);
+	if (accept)
+	{
+		removeElement(list, number);
+		changeItAndNextAfterNumbers(*list, number - 1, -1);
+		printf("\nСтудент был успешно удален!");
+		getchar(); getchar();
+	}
 	return;
 }
 
