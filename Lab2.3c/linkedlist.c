@@ -1,17 +1,20 @@
 //Author: Daniyar Bayguzhinov
-//Функции для работы с структурами типа NodeList
+//Функции для работы с структурами NodeList
 
 #include "linkedlist.h"
 
 //Декларация приватных функций
 void changeThisAndSubsequentNumbers	(struct NodeList* current, int value);
 void removeNextElem					(struct NodeList* current);
+struct NodeList* createNode();
+
 int findListLength(struct NodeList* head)
 {
 	if (head == NULL)
 		return 0;
 	return 1 + findListLength(head->next);
 }
+
 void printList(struct NodeList* list)
 {
 	struct NodeList* current = list;
@@ -63,10 +66,9 @@ void pushTwoElemAfterFirst(struct NodeList* head, struct Students first, struct 
 	current = current->next;
 	current->next = createNode();
 	current->next->data = second;
-	
+
 	current = current->next;
-	current = current->next;
-	changeThisAndSubsequentNumbers(current, 2);
+	current->next = savedNext;
 }
 //Private
 struct NodeList* createNode()
@@ -155,7 +157,7 @@ void removeElement(struct NodeList** head, int number)
 	}
 	return;
 }
-//Private: Удаление элемента стоящего в списке слудеющим
+//Private: Удаление элемента стоящего в списке слудующим
 void removeNextElem(struct NodeList* current)
 {
 	struct NodeList* savedNext;
@@ -174,6 +176,20 @@ void changeThisAndSubsequentNumbers(struct NodeList* current,int value)
 	}
 	return;	
 }
+void changeItAndNextAfterNumbers(struct NodeList* head, int number, int value)
+{
+	for (int i = 0; i < number; i++)
+	{
+		head = head->next;
+	}
+	while (head != NULL)
+	{
+		head->data.number += value;
+		head = head->next;
+	}
+	return;
+}
+
 
 void deleteList(struct NodeList* list)
 {

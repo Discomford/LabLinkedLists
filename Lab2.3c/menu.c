@@ -7,10 +7,9 @@
 
 void menuAddElement(struct NodeList** list)
 {
-	struct Students newStudent = writeStudents(1);
+	struct Students newStudent = writeStudents(1 + findListLength(*list));
 	pushBack(list, newStudent);
 }
-
 void menuRemoveStudentFromList(struct Students **list)
 {
 	int number;
@@ -25,5 +24,6 @@ void menuAddTwoElementsAfterFirst(struct NodeList* list)
 	struct Students first	=	writeStudents(2);
 	struct Students second	=	writeStudents(3);
 	pushTwoElemAfterFirst(list, first, second);
+	changeItAndNextAfterNumbers(list, 3, 2);
 	return;
 }
