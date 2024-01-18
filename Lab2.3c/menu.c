@@ -45,6 +45,8 @@ void menuSaveToFile(struct NodeList* list, char path[])
 {
 	saveToFile(list, path);
 	printf("\nДанные были успешно сохраненны!");
+	getchar(); getchar();
+
 	return;
 }
 //Пункт меню, загружающий данные в файл
@@ -54,7 +56,8 @@ void menuLoadFromFile(struct NodeList** list, char path[])
 	loadFromFile(list, path);
 	changeItAndNextAfterNumbers(*list, length, length);
 	
-	printf("\nЗагрузка из файла прошла успешно");
+	printf("Загрузка из файла прошла успешно");
+	getchar(); getchar();
 	return;
 }
 

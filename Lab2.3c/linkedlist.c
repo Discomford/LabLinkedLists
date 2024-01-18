@@ -3,13 +3,11 @@
 
 #include "linkedlist.h"
 
-
 //Декларация приватных функций
 struct NodeList*	createNodeWithData	(struct Students data);
 struct NodeList*	createNode			();
 void				removeFirstElement	(struct NodeList** head);
 void				removeNextElem		(struct NodeList* current);
-
 
 //Поиск длины списка
 int findListLength(struct NodeList* head)
@@ -39,7 +37,6 @@ void printList(struct NodeList* list)
 	getchar(); getchar();
 	return;
 }
-
 //Добавление элемента в конец списка
 void pushBack(struct NodeList** head, struct Students student)
 {

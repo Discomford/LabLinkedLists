@@ -12,9 +12,9 @@ int main()
 	system("chcp 1251");
 	system("cls");
 
-	char	path[] = "file";
-	int		action;
-	struct	NodeList* myList = NULL;
+	char				path[] = "file";
+	int					action;
+	struct	NodeList*	myList = NULL;
 	while (1)
 	{
 		system("cls");
@@ -29,6 +29,7 @@ int main()
 		printf("________________________________________\n");
 		printf("Введите номер пункта меню:");
 		scanf("%d", &action);
+
 		switch (action)
 		{
 		case 1://Вывод списка
